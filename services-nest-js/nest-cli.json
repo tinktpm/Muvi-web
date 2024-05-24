@@ -1,0 +1,31 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "assets": ["**/*.ts"],
+    "watchAssets": true
+  },
+  "projects": {
+    "app": {
+      "type": "application",
+      "root": "src",
+      "entryFile": "main",
+      "tsConfigPath": "tsconfig.build.json",
+      "sourceRoot": "src"
+    },
+    "user": {
+      "type": "application",
+      "root": "services/user/src",
+      "entryFile": "main",
+      "tsConfigPath": "services/user/tsconfig.build.json",
+      "sourceRoot": "services/user/src"
+    },
+    "auth": {
+      "type": "application",
+      "root": "services/auth/src",
+      "entryFile": "main",
+      "tsConfigPath": "services/auth/tsconfig.build.json",
+      "sourceRoot": "services/auth/src"
+    }
+  }
+}

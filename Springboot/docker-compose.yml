@@ -1,0 +1,41 @@
+version: "3.7"
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:4.4.14-rc0-focal
+    restart: always
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+    volumes:
+      - ./mongo-data:/data/db
+  discovery-server:
+    image: microservice/discovery-server:latest
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+#  api-gateway:
+#    image: microservices/api-gateway:latest
+#    container_name: api-gateway
+#    ports:
+#      - "8080:8080"
+#    expose:
+#      - "8080"
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY= TRACE
+#    depends_on:
+#      - discovery-server
+  film-service:
+    container_name: film-service
+    image: microservice/film-service:latest
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_APPLICATION_NAME=film-service
+    depends_on:
+      - discovery-server
+#      - api-gateway
